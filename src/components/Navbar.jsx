@@ -1,13 +1,18 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <nav className="navbar">
-
       <div className="navbar-container">
 
-        <Link to="/" className="navbar-brand">
-
+        <Link to="/" className="navbar-brand" onClick={closeMenu}>
           <div className="brand-icon">
             🧠
           </div>
@@ -21,42 +26,59 @@ function Navbar() {
               Discover • Learn • Build
             </div>
           </div>
-
         </Link>
 
-        <div className="navbar-links">
+        {/* Mobile hamburger button */}
+        <button
+          className={`hamburger ${menuOpen ? "active" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={menuOpen}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
 
-          <Link to="/">Home</Link>
+        {/* Navigation */}
+        <div className={`navbar-links ${menuOpen ? "mobile-open" : ""}`}>
 
-          <Link to="/profile">Profile</Link>
+          <Link to="/" onClick={closeMenu}>
+            Home
+          </Link>
 
-          <Link to="/career-goal">
+          <Link to="/profile" onClick={closeMenu}>
+            Profile
+          </Link>
+
+          <Link to="/career-goal" onClick={closeMenu}>
             Career Goal
           </Link>
 
-          <Link to="/assessment">
+          <Link to="/assessment" onClick={closeMenu}>
             Assessment
           </Link>
 
-          <Link to="/skill-gap">
+          <Link to="/skill-gap" onClick={closeMenu}>
             Skill Gap
           </Link>
 
-          <Link to="/roadmap">
+          <Link to="/roadmap" onClick={closeMenu}>
             Roadmap
           </Link>
 
-          <Link to="/challenges">
+          <Link to="/challenges" onClick={closeMenu}>
             Challenges
           </Link>
 
-          <Link to="/dashboard">
+          <Link to="/dashboard" onClick={closeMenu}>
             Dashboard
           </Link>
 
           <Link
             to="/login"
             className="login-nav-button"
+            onClick={closeMenu}
           >
             Login
           </Link>
@@ -64,7 +86,6 @@ function Navbar() {
         </div>
 
       </div>
-
     </nav>
   );
 }
