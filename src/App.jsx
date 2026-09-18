@@ -1,3 +1,6 @@
+
+
+import { searchSkills } from "./services/mossService";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
@@ -13,6 +16,17 @@ import Challenges from "./pages/Challenges";
 import Dashboard from "./pages/Dashboard";
 
 import "./App.css";
+
+const handleSkillSearch = async () => {
+  const results = await searchSkills("I want to become a data analyst");
+
+  console.log("SkillQuest Retrieval Results:", results);
+};
+
+
+
+
+
 
 function App() {
   return (
@@ -49,5 +63,9 @@ function App() {
     </BrowserRouter>
   );
 }
+
+<button onClick={handleSkillSearch}>
+  Test SkillQuest Retrieval
+</button>
 
 export default App;
